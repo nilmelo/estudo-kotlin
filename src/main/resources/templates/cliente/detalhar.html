@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,32 @@
         rel="stylesheet" 
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
         crossorigin="anonymous">
-    <title>Spring Fundamentos</title>
+    <title>Spring Fundamentos - Detalhes do Cliente</title>
 </head>
+
 <body>
     <main class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Teste Sprint</h1>
+                <h1>Teste Sprint - Detalhes do Cliente</h1>
             </div>
         </div>
     </main>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <h5 class="card-header" th:text="${cliente.nome}"></h5>
+                <div class="card-body">
+                    <p> Profissão: <span th:text="${cliente.profissao}"></span></p>
+                    <p> Data de Nascimento: <span th:text="${cliente.dataNascimento}"></span></p>
+
+                    <a href="" class="btn btn-warning">Editar</a>
+                    <a href="" class="btn btn-danger">Excluir</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
@@ -25,4 +42,5 @@
         crossorigin="anonymous">
     </script>
 </body>
+
 </html>
