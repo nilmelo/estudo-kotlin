@@ -23,15 +23,18 @@ public class Cliente {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false, name = "data_nascimento")
-    @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataNescimento;
-
     @Column(nullable = false)
     private String profissao;
 
-    public Cliente(String profissao) {
+    @Column(nullable = false, name = "data_nascimento")
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataNascimento;
+
+    public Cliente(Long id, String nome, String profissao, LocalDate dataNascimento) {
+        this.id = id;
+        this.nome = nome;
         this.profissao = profissao;
+        this.dataNascimento = dataNascimento;
     }
 
     @Override
@@ -40,15 +43,9 @@ public class Cliente {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((dataNescimento == null) ? 0 : dataNescimento.hashCode());
         result = prime * result + ((profissao == null) ? 0 : profissao.hashCode());
+        result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente [id=" + id + ", nome=" + nome + ", dataNescimento=" + dataNescimento + ", profissao="
-                + profissao + "]";
     }
 
     @Override
@@ -70,24 +67,23 @@ public class Cliente {
                 return false;
         } else if (!nome.equals(other.nome))
             return false;
-        if (dataNescimento == null) {
-            if (other.dataNescimento != null)
-                return false;
-        } else if (!dataNescimento.equals(other.dataNescimento))
-            return false;
         if (profissao == null) {
             if (other.profissao != null)
                 return false;
         } else if (!profissao.equals(other.profissao))
             return false;
+        if (dataNascimento == null) {
+            if (other.dataNascimento != null)
+                return false;
+        } else if (!dataNascimento.equals(other.dataNascimento))
+            return false;
         return true;
     }
 
-    public Cliente(Long id, String nome, LocalDate dataNescimento, String profissao) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNescimento = dataNescimento;
-        this.profissao = profissao;
+    @Override
+    public String toString() {
+        return "Cliente [id=" + id + ", nome=" + nome + ", profissao=" + profissao + ", dataNascimento="
+                + dataNascimento + "]";
     }
 
     public Cliente() {
@@ -109,19 +105,19 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public LocalDate getDataNescimento() {
-        return dataNescimento;
-    }
-
-    public void setDataNescimento(LocalDate dataNescimento) {
-        this.dataNescimento = dataNescimento;
-    }
-
     public String getProfissao() {
         return profissao;
     }
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }
