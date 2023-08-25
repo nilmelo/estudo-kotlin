@@ -29,8 +29,19 @@
                     <p> Profissão: <span th:text="${cliente.profissao}"></span></p>
                     <p> Data de Nascimento: <span th:text="${cliente.dataNascimento}"></span></p>
 
-                    <a href="" class="btn btn-warning">Editar</a>
-                    <a href="" class="btn btn-danger">Excluir</a>
+                    <a 
+                        th:href="@{/cliente/{id}/editar (id=${cliente.id})}" 
+                        class="btn btn-warning"
+                    >
+                        Editar
+                    </a>
+                    <a 
+                        th:href="@{/cliente/{id}/excluir (id=${cliente.id})}" 
+                        class="btn btn-danger"
+                        onclick="return confirm('Tem certeza que deseja excluir o cliente?');"
+                    >
+                        Excluir
+                    </a>
                 </div>
             </div>
         </div>
