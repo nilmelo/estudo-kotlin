@@ -1,6 +1,9 @@
 package br.com.treinaweb.twclientes.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +24,8 @@ public class Cliente {
     private String nome;
 
     @Column(nullable = false, name = "data_nascimento")
-    private Date dataNescimento;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataNescimento;
 
     @Column(nullable = false)
     private String profissao;
@@ -79,11 +83,14 @@ public class Cliente {
         return true;
     }
 
-    public Cliente(Long id, String nome, Date dataNescimento, String profissao) {
+    public Cliente(Long id, String nome, LocalDate dataNescimento, String profissao) {
         this.id = id;
         this.nome = nome;
         this.dataNescimento = dataNescimento;
         this.profissao = profissao;
+    }
+
+    public Cliente() {
     }
 
     public Long getId() {
@@ -102,11 +109,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public Date getDataNescimento() {
+    public LocalDate getDataNescimento() {
         return dataNescimento;
     }
 
-    public void setDataNescimento(Date dataNescimento) {
+    public void setDataNescimento(LocalDate dataNescimento) {
         this.dataNescimento = dataNescimento;
     }
 
