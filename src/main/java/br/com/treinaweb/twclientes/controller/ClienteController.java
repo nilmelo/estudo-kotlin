@@ -41,7 +41,7 @@ public class ClienteController {
 
     @GetMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/cliente");
+        ModelAndView modelAndView = new ModelAndView("redirect:/cliente/");
 
         clienteRepository.deleteById(id);
 
@@ -59,7 +59,7 @@ public class ClienteController {
 
     @PostMapping("/cadastrar")
     public ModelAndView cadastrar(Cliente cliente) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/cliente");
+        ModelAndView modelAndView = new ModelAndView("redirect:/cliente/");
 
         clienteRepository.save(cliente);
 
@@ -78,7 +78,7 @@ public class ClienteController {
 
     @PostMapping("/{id}/editar")
     public ModelAndView editar(Cliente cliente) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/cliente");
+        ModelAndView modelAndView = new ModelAndView("redirect:/cliente/");
 
         clienteRepository.save(cliente);
 
