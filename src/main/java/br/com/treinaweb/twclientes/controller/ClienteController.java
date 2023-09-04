@@ -10,38 +10,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.com.treinaweb.twclientes.model.Cliente;
+import br.com.treinaweb.twclientes.model.UF;
 import br.com.treinaweb.twclientes.repository.ClienteRepository;
 
 @Controller
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/")
-    public ModelAndView listar() {
-        ModelAndView modelAndView = new ModelAndView("cliente/listar.html");
+    @GetMapping
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView("cliente/listar");
 
-        List<Cliente> clientes = clienteRepository.findAll();
-        modelAndView.addObject("clientes", clientes);
+        modelAndView.addObject("clientes", clienteRepository.findAll());
 
         return modelAndView;
     }
 
     @GetMapping("/{id}")
     public ModelAndView detalhar(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("cliente/detalhar.html");
-
-        Cliente cliente = clienteRepository.getReferenceById(id);
-        modelAndView.addObject("cliente", cliente);
+        ModelAndView modelAndView = new ModelAndView("cliente/detalhar");
+        modelAndView.addObject("cliente", clienteRepository.getReferenceById(id));
 
         return modelAndView;
     }
 
     @GetMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/cliente/");
+        ModelAndView modelAndView = new ModelAndView("redirect:/clientes");
 
         clienteRepository.deleteById(id);
 
@@ -53,34 +51,24 @@ public class ClienteController {
         ModelAndView modelAndView = new ModelAndView("cliente/cadastrar");
 
         modelAndView.addObject("cliente", new Cliente());
+        modelAndView.addObject("ufs", UF.values());
 
         return modelAndView;
     }
 
-    @PostMapping("/cadastrar")
-    public ModelAndView cadastrar(Cliente cliente) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/cliente/");
-
+    @PostMapping({"/cadastrar", "/{id}/editar"})
+    public String salvar(Cliente cliente) {
         clienteRepository.save(cliente);
 
-        return modelAndView;
+        return "redirect:/clientes";
     }
 
     @GetMapping("/{id}/editar")
     public ModelAndView editar(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("cliente/editar");
+        ModelAndView modelAndView = new ModelAndView("cliente/cadastrar");
 
-        Cliente cliente = clienteRepository.getReferenceById(id);
-        modelAndView.addObject("cliente", cliente);
-
-        return modelAndView;
-    }
-
-    @PostMapping("/{id}/editar")
-    public ModelAndView editar(Cliente cliente) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/cliente/");
-
-        clienteRepository.save(cliente);
+        modelAndView.addObject("cliente", clienteRepository.getReferenceById(id));
+        modelAndView.addObject("ufs", UF.values());
 
         return modelAndView;
     }
